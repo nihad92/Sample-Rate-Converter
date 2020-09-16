@@ -1,0 +1,3 @@
+include ':sampleconverter'
+include ':app'
+rootProject.name = "Sample Converter"
