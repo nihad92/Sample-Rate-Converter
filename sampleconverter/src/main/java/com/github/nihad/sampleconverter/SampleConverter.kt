@@ -1,13 +1,17 @@
 package com.github.nihad.sampleconverter
 
-class SampleConverter {
+import com.github.nihad.sampleconverter.common.IHandle
+
+class SampleConverter : IHandle, AutoCloseable {
     init {
         System.loadLibrary("oboe-sample-converter")
     }
 
-    fun cleanResampler() {
-        clean()
+    constructor(inputSampleRate: Int, outputSampleRate: Int, channelCount: Int) {
+        initialize(inputSampleRate, outputSampleRate, channelCount)
     }
+
+    private external fun initialize(inputSampleRate: Int, outputSampleRate: Int, channelCount: Int)
 
     fun resample(input: ByteArray,
                  inputSampleRate: Int,
@@ -25,5 +29,8 @@ class SampleConverter {
                                   outputSampleRate: Int,
                                   channelCount: Int): ShortArray
 
-    private external fun clean()
+    external override fun close();
+
+    override val nativeHandle: Long = 0
+
 }

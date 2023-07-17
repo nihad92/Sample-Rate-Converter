@@ -16,7 +16,10 @@ set (OBOE_DIR src/main/cpp/oboe)
 add_subdirectory (${OBOE_DIR} ./oboe)
 
 
-add_library(${PROJECT_NAME} SHARED src/main/cpp/SampleConverter.cpp)
+add_library(${PROJECT_NAME} SHARED
+        src/main/cpp/common/handle.h
+        src/main/cpp/converter.cpp)
+
 # Specify the libraries which our native library is dependent on, including Oboe
 target_link_libraries (${PROJECT_NAME} log oboe)
 

@@ -6,14 +6,14 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.nihad92'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.0"
 
     ndkVersion "21.1.6352462"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -40,6 +40,15 @@ android {
         cmake {
             path "CMakeLists.txt"
         }
+    }
+
+    compileOptions {
+        sourceCompatibility 11
+        targetCompatibility 11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
