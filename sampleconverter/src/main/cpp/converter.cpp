@@ -62,14 +62,14 @@ Java_com_github_nihad_sampleconverter_SampleConverter_initialize(JNIEnv *env, jo
                                                                  jint input_sample_rate,
                                                                  jint output_sample_rate,
                                                                  jint channel_count) {
-    auto resampler = MultiChannelResampler::Builder()
+    g_object = createGlobalReference(env, thiz, thiz);
+    auto *resampler = MultiChannelResampler::Builder()
             .setChannelCount(channel_count)
             ->setInputRate(input_sample_rate)
             ->setOutputRate(output_sample_rate)
             ->setNumTaps(32)
             ->build();
 
-    g_object = createGlobalReference(env, thiz, thiz);
     setHandle(env, g_object, resampler);
 }
 extern "C"
