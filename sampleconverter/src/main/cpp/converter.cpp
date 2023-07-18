@@ -38,8 +38,7 @@ JNICALL Java_com_github_nihad_sampleconverter_SampleConverter_resample(JNIEnv *e
     while (inputFramesLeft > 0) {
         if (resampler->isWriteNeeded()) {
             resampler->writeNextFrame(inputBuffer);
-            inputBuffer +=
-                    channelCount;
+            inputBuffer += channelCount;
             inputFramesLeft--;
         } else {
             resampler->readNextFrame(outputBufferPointer);
@@ -64,13 +63,7 @@ Java_com_github_nihad_sampleconverter_SampleConverter_initialize(JNIEnv *env, jo
                                                                  jint channel_count,
                                                                  jint num_of_taps) {
     g_object = createGlobalReference(env, thiz, thiz);
-    auto *resampler = MultiChannelResampler::Builder()
-            .setChannelCount(channel_count)
-            ->setInputRate(input_sample_rate)
-            ->setOutputRate(output_sample_rate)
-            ->setNumTaps(num_of_taps)
-            ->build();
-
+    auto *resampler = MultiChannelResampler::make(channel_count, input_sample_rate, output_sample_rate, MultiChannelResampler::Quality::Best);
     setHandle(env, g_object, resampler);
 }
 extern "C"
