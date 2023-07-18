@@ -7,11 +7,11 @@ class SampleConverter : IHandle, AutoCloseable {
         System.loadLibrary("oboe-sample-converter")
     }
 
-    constructor(inputSampleRate: Int, outputSampleRate: Int, channelCount: Int) {
-        initialize(inputSampleRate, outputSampleRate, channelCount)
+    constructor(inputSampleRate: Int, outputSampleRate: Int, channelCount: Int, numOfTaps: Int = 32) {
+        initialize(inputSampleRate, outputSampleRate, channelCount, numOfTaps)
     }
 
-    private external fun initialize(inputSampleRate: Int, outputSampleRate: Int, channelCount: Int)
+    private external fun initialize(inputSampleRate: Int, outputSampleRate: Int, channelCount: Int, numOfTaps: Int)
 
     fun resample(input: ByteArray,
                  inputSampleRate: Int,

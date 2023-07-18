@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    val sampleConverter = SampleConverter(48000, 44100, 2)
+    val sampleConverter = SampleConverter(48000, 44100, 2, 32)
     sampleConverter.resample(ByteArray(4), 48000, 44100, 2, 16)
     sampleConverter.close()
   }

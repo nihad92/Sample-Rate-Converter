@@ -61,13 +61,14 @@ JNIEXPORT void JNICALL
 Java_com_github_nihad_sampleconverter_SampleConverter_initialize(JNIEnv *env, jobject thiz,
                                                                  jint input_sample_rate,
                                                                  jint output_sample_rate,
-                                                                 jint channel_count) {
+                                                                 jint channel_count,
+                                                                 jint num_of_taps) {
     g_object = createGlobalReference(env, thiz, thiz);
     auto *resampler = MultiChannelResampler::Builder()
             .setChannelCount(channel_count)
             ->setInputRate(input_sample_rate)
             ->setOutputRate(output_sample_rate)
-            ->setNumTaps(32)
+            ->setNumTaps(num_of_taps)
             ->build();
 
     setHandle(env, g_object, resampler);
